@@ -14,7 +14,7 @@
 	}
 
 	.date {
-		border-right: 2px solid $light-blue;
+		border-right: 1px solid $light-blue;
 		text-align: center;
 		margin: 0;
 		padding: {
@@ -68,12 +68,20 @@
 	}
 
 	.events-all {
-		text-transform: uppercase;
+		text: {
+			transform: uppercase;
+			align: center;
+		}
 		font: {
 			size: 1.5rem;
 			weight: 600;
 		}
 		line-height: 1;
+		margin-top: $grid-margin-gutters * 1.5;
+
+		.button {
+			margin-bottom: 0;
+		}
 	}
 
 	> .grid-container > .grid-x {
@@ -101,19 +109,6 @@
 		}
 	}
 
-	.events-all {
-		margin-top: $grid-margin-gutters * 1.5;
-		text-align: center;
-
-		.button {
-			margin-bottom: 0;
-		}
-	}
-
-	.date {
-		border-right-width: 1px;
-	}
-
 	@include breakpoint(small only) {
 		.small-12 ~ .small-12 {
 			margin-top: 2rem;
@@ -123,4 +118,27 @@
 	.arrow-right {
 		@extend %arrow-right;
 	}
+
+	.truncate-lines {
+		@include text-truncate;
+	}
+
+	@include breakpoint(medium) {
+		.medium-truncate-lines {
+			@include text-truncate;
+		}
+
+		.medium-truncate-1-line {
+			-webkit-line-clamp: 1; // sass-lint:disable-line no-vendor-prefixes
+		}
+
+		.medium-truncate-2-lines {
+			-webkit-line-clamp: 2; // sass-lint:disable-line no-vendor-prefixes
+		}
+
+		.medium-truncate-4-lines {
+			-webkit-line-clamp: 4; // sass-lint:disable-line no-vendor-prefixes
+		}
+	}
+
 }
