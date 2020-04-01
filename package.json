@@ -1,6 +1,6 @@
 {
   "name": "agrilife-livewhale",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WordPress plugin to provide LiveWhale content for AgriLife affiliated websites",
   "main": "agrilife-livewhale.php",
   "scripts": {

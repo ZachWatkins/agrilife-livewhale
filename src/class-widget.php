@@ -188,7 +188,7 @@ class Widget_LiveWhale extends WP_Widget {
 			sprintf(
 				$feed_url_output,
 				esc_attr( $this->get_field_id( 'feed_url' ) ),
-				esc_attr( 'Title:', 'agrilife-livewhale' ),
+				esc_attr( 'Feed URL:', 'agrilife-livewhale' ),
 				esc_attr( $this->get_field_id( 'feed_url' ) ),
 				$this->get_field_name( 'feed_url' ),
 				esc_attr( $instance['feed_url'] )
