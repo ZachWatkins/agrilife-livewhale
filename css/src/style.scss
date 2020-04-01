@@ -4,6 +4,8 @@
 @import "settings";
 @import "util/extends";
 @import "block";
+@import "widget";
+@import "typography";
 
 @include foundation-xy-grid-classes(
 	$base-grid: true,

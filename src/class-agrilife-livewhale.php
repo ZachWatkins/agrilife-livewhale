@@ -53,6 +53,22 @@ class AgriLife_LiveWhale {
 
 		}
 
+		// Add Widgets.
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+	}
+
+	/**
+	 * Register widgets
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function register_widgets() {
+
+		require_once AGLVW_DIR_PATH . '/src/class-widget.php';
+		register_widget( 'Widget_LiveWhale' );
+
 	}
 
 	/**
