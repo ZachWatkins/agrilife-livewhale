@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+$admin: true;
+
+@import "foundation";
+@import "settings";
+@import "util/extends";
+@import "block-livewhale";
+
+@include foundation-xy-grid-classes(
+	$base-grid: true,
+	$margin-grid: false,
+	$padding-grid: true,
+	$block-grid: false,
+	$collapse: true,
+	$offset: false,
+	$vertical-grid: false,
+	$frame-grid: false
+);
