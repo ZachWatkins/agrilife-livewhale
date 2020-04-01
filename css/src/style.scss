@@ -3,7 +3,7 @@
 @import "foundation";
 @import "settings";
 @import "util/extends";
-@import "block-livewhale";
+@import "block";
 
 @include foundation-xy-grid-classes(
 	$base-grid: true,
