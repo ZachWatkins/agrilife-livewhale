@@ -43,23 +43,13 @@ class AgriLife_LiveWhale {
 
 		$theme = wp_get_theme();
 
-		if ( 'AgriFlex4' != $theme->name || 'AgriFlex4' != $theme->parent_theme ) {
+		require_once AGLVW_DIR_PATH . '/src/class-assets.php';
+		require_once AGLVW_DIR_PATH . '/src/class-block.php';
 
-			require_once AGLVW_DIR_PATH . '/src/class-assets.php';
-			require_once AGLVW_DIR_PATH . '/src/class-block.php';
+		new \AgriLife_LiveWhale\Assets();
+		new \AgriLife_LiveWhale\Block();
 
-			new \AgriLife_LiveWhale\Assets();
-			new \AgriLife_LiveWhale\Block();
-
-		}
-
-		// Add Widgets.
-		if ( 'AgriLife Today' != $theme->name || 'AgriLife Today' != $theme->parent_theme ) {
-
-			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-
-		}
-
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 
 	}
