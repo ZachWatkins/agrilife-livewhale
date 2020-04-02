@@ -54,7 +54,11 @@ class AgriLife_LiveWhale {
 		}
 
 		// Add Widgets.
-		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+		if ( 'AgriLife Today' != $theme->name || 'AgriLife Today' != $theme->parent_theme ) {
+
+			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+		}
 
 	}
 
