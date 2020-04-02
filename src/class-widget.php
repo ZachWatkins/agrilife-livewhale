@@ -187,11 +187,11 @@ class Widget_LiveWhale extends WP_Widget {
 		echo wp_kses(
 			sprintf(
 				$feed_url_output,
-				esc_attr( $this->get_field_id( 'feed_url' ) ),
+				esc_url( $this->get_field_id( 'feed_url' ) ),
 				esc_attr( 'Feed URL:', 'agrilife-livewhale' ),
-				esc_attr( $this->get_field_id( 'feed_url' ) ),
+				esc_url( $this->get_field_id( 'feed_url' ) ),
 				$this->get_field_name( 'feed_url' ),
-				esc_attr( $instance['feed_url'] )
+				esc_url( $instance['feed_url'] )
 			),
 			array(
 				'p'     => array(),
@@ -264,7 +264,11 @@ class Widget_LiveWhale extends WP_Widget {
 
 		$instance              = array_merge( $this->default_instance, $old_instance );
 		$instance['title']     = sanitize_text_field( $new_instance['title'] );
-		$instance['feed_url']  = sanitize_text_field( $new_instance['feed_url'] );
+		$instance['feed_url']  = strip_tags(
+		  stripslashes(
+		    filter_var( $new_instance['feed_url'], FILTER_VALIDATE_URL )
+		  )
+		);
 		$instance['direction'] = sanitize_text_field( $new_instance['direction'] );
 		return $instance;
 
