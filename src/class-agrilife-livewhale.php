@@ -60,6 +60,8 @@ class AgriLife_LiveWhale {
 
 		}
 
+		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
+
 	}
 
 	/**
@@ -72,6 +74,42 @@ class AgriLife_LiveWhale {
 
 		require_once AGLVW_DIR_PATH . '/src/class-widget.php';
 		register_widget( 'Widget_LiveWhale' );
+
+	}
+
+	/**
+	 * Add class name to widget elements
+	 *
+	 * @since 1.0.4
+	 * @param array $params Widget parameters.
+	 * @return array
+	 */
+	public function add_widget_class( $params ) {
+
+		$str = $params[0]['before_widget'];
+		preg_match( '/class="([^"]+)"/', $str, $match );
+		$classes = explode( ' ', $match[1] );
+
+		if ( in_array( 'widget', $classes, true ) ) {
+
+			if ( false !== strpos( $params[0]['widget_id'], 'agrilife_livewhale' ) ) {
+
+				$classes[] = 'livewhale';
+
+				if ( 'sidebar' !== $params[0]['id'] && 'sidebar-alt' !== $params[0]['id'] ) {
+
+					$classes[] = 'invert';
+
+				}
+
+			}
+
+			$class_output               = implode( ' ', $classes );
+			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
+
+		}
+
+		return $params;
 
 	}
 
