@@ -5,7 +5,8 @@ $admin: true;
 @import "foundation";
 @import "settings";
 @import "util/extends";
-@import "block-livewhale";
+@import "block";
+@import "livewhale";
 
 @include foundation-xy-grid-classes(
 	$base-grid: true,
