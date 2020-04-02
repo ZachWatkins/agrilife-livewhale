@@ -43,7 +43,7 @@ class AgriLife_LiveWhale {
 
 		$theme = wp_get_theme();
 
-		if ( 'AgriFlex4' == $theme->name || 'AgriFlex4' == $theme->parent_theme ) {
+		if ( 'AgriFlex4' != $theme->name || 'AgriFlex4' != $theme->parent_theme ) {
 
 			require_once AGLVW_DIR_PATH . '/src/class-assets.php';
 			require_once AGLVW_DIR_PATH . '/src/class-block.php';
