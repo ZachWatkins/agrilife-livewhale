@@ -36,7 +36,7 @@ class Widget_LiveWhale extends WP_Widget {
 	public function __construct() {
 
 		$widget_ops = array(
-			'classname'                   => 'agrilife-livewhale',
+			'classname'                   => 'ag-wgt-lvwl',
 			'description'                 => __( 'Show LiveWhale events' ),
 			'customize_selective_refresh' => true,
 		);
