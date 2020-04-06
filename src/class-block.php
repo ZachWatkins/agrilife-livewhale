@@ -132,8 +132,8 @@ class Block {
 		$l_event_list = '';
 		preg_match('/(http(s)?:\/\/calendar.tamu.edu)/i', $furl, $base);
 		$all_url = $base[0];
-		preg_match('/(group\/[^\/]+)/i', $furl, $group);
-		$all_url .= '/' . $group[0];
+		preg_match('/group(\/[^\/]+)/i', $furl, $group);
+		$aurl .= $group[1];
 
 		foreach ( $l_events as $event ) {
 

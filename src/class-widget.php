@@ -126,8 +126,8 @@ class Widget_LiveWhale extends WP_Widget {
 			$all_events = preg_replace('/(http(s)?:\/\/calendar.tamu.edu)\/live\/json/i', '$1', $feed_url);
 			preg_match('/(http(s)?:\/\/calendar.tamu.edu)/i', $feed_url, $base);
 			$all_url = $base[0];
-			preg_match('/(group\/[^\/]+)/i', $feed_url, $group);
-			$all_url .= '/' . $group[0];
+			preg_match('/group(\/[^\/]+)/i', $feed_url, $group);
+			$all_url .= $group[1];
 			$output .= sprintf(
 				'<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="%s" target="_blank"><span class="h3">All Events</span></a></div>',
 				$all_url
