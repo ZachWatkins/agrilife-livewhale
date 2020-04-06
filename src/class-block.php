@@ -130,6 +130,10 @@ class Block {
 		$feed_array   = json_decode( $feed_json['body'], true );
 		$l_events     = array_slice( $feed_array, 0, $count ); // Choose number of events.
 		$l_event_list = '';
+		preg_match('/(http(s)?:\/\/calendar.tamu.edu)/i', $furl, $base);
+		$all_url = $base[0];
+		preg_match('/(group\/[^\/]+)/i', $furl, $group);
+		$all_url .= '/' . $group[0];
 
 		foreach ( $l_events as $event ) {
 
@@ -160,13 +164,10 @@ class Block {
 
 		}
 
-		$aurl = str_replace( '/live/json', '', $furl );
-		$aurl = preg_replace( '/\/max\/\d+/', '', $furl );
-
 		$output .= sprintf(
 			$cal_template,
 			$l_event_list,
-			$aurl
+			$all_url
 		);
 
 		return $output;
