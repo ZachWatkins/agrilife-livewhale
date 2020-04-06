@@ -134,8 +134,7 @@ class Block {
 		if ( array_key_exists( 'group', $attributes ) && ! empty( $attributes['group'] ) ) {
 			$group = $attributes['group'];
 		}
-		preg_match('/(http(s)?:\/\/calendar.tamu.edu)/i', $furl, $base);
-		$all_url = $base[0] . $group;
+		$all_url = 'https://calendar.tamu.edu/' . $group . '/';
 
 		foreach ( $l_events as $event ) {
 

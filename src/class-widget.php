@@ -125,10 +125,10 @@ class Widget_LiveWhale extends WP_Widget {
 
 			$group = 'agrilife';
 			if ( false !== strpos( $feed_url, 'group' ) ) {
-				preg_match('/group(\/[^\/]+)/i', $feed_url, $group);
+				preg_match('/group\/([^\/]+)/i', $feed_url, $group);
 				$group = $group[1];
 			}
-			$all_url = 'https://calendar.tamu.edu' . $group;
+			$all_url = 'https://calendar.tamu.edu/' . $group . '/';
 
 			$output .= sprintf(
 				'<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="%s" target="_blank"><span class="h3">All Events</span></a></div>',
