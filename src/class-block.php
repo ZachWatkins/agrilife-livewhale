@@ -130,10 +130,12 @@ class Block {
 		$feed_array   = json_decode( $feed_json['body'], true );
 		$l_events     = array_slice( $feed_array, 0, $count ); // Choose number of events.
 		$l_event_list = '';
+		$group        = 'agrilife';
+		if ( array_key_exists( 'group', $attributes ) && ! empty( $attributes['group'] ) ) {
+			$group = $attributes['group'];
+		}
 		preg_match('/(http(s)?:\/\/calendar.tamu.edu)/i', $furl, $base);
-		$all_url = $base[0];
-		preg_match('/group(\/[^\/]+)/i', $furl, $group);
-		$aurl .= $group[1];
+		$all_url = $base[0] . $group;
 
 		foreach ( $l_events as $event ) {
 
