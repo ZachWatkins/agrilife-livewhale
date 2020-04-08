@@ -96,7 +96,7 @@
 				return
 
 			subscription = el(TextControl,
-				label: 'Calendar'
+				label: 'Subscription'
 				className: 'control-subscription'
 				value: props.attributes.subscription
 				key: 'subscription'
