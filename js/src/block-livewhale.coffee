@@ -50,8 +50,7 @@
 				el 'div', { class: 'events-all cell shrink' },
 					el 'a', {
 						class: 'h3 arrow-right',
-						href: getLiveWhaleURL props
-							.replace /\/max\/\d+/, ''
+						href: props.attributes.allevents
 					}, 'All Events'
 			]
 
@@ -63,6 +62,9 @@
 		anchor: true
 		multiple: false
 		attributes:
+			allevents:
+				type: 'string'
+				default: 'http://calendar.tamu.edu/agrilife/'
 			group: type: 'string'
 			category: type: 'string'
 			tag: type: 'string'
@@ -76,6 +78,9 @@
 				source: 'html'
 				selector: '.livewhale-block'
 		edit: (props) ->
+			updatealleventsValue = (val) ->
+				props.setAttributes allevents: val
+				return
 			updatesubscriptionValue = (val) ->
 				props.setAttributes subscription: val
 				return
@@ -95,6 +100,12 @@
 				props.setAttributes starred: val
 				return
 
+			allevents = el(TextControl,
+				label: 'All Events Button Link'
+				className: 'control-allevents'
+				value: props.attributes.allevents
+				key: 'allevents'
+				onChange: updatealleventsValue)
 			subscription = el(TextControl,
 				label: 'Subscription'
 				className: 'control-subscription'
@@ -138,6 +149,7 @@
 				title: 'LiveWhale settings'
 				initialOpen: true
 			}, [
+				allevents
 				subscription
 				group
 				category

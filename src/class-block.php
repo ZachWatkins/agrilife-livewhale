@@ -134,7 +134,7 @@ class Block {
 		if ( array_key_exists( 'group', $attributes ) && ! empty( $attributes['group'] ) ) {
 			$group = $attributes['group'];
 		}
-		$all_url = 'https://calendar.tamu.edu/' . $group . '/';
+		$all_url = $attributes['all_url'];
 
 		foreach ( $l_events as $event ) {
 
