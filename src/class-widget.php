@@ -25,6 +25,7 @@ class Widget_LiveWhale extends WP_Widget {
 	protected $default_instance = array(
 		'title'    => 'Events',
 		'feed_url' => 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/hide_repeats/true/',
+		'all_url'  => 'https://calendar.tamu.edu/agrilife/',
 	);
 
 	/**
@@ -62,7 +63,8 @@ class Widget_LiveWhale extends WP_Widget {
 		$instance  = array_merge( $this->default_instance, $instance );
 		$title     = $instance['title'];
 		$direction = array_key_exists( 'direction', $instance ) ? $instance['direction'] : 'vertical';
-		$feed_url  = array_key_exists( 'feed_url', $instance ) ? $instance['feed_url'] : 'https://calendar.tamu.edu/live/json/events/group/Texas%20A%26amp%3BM%20AgriLife/only_starred/true/max/3/hide_repeats/true/';
+		$feed_url  = array_key_exists( 'feed_url', $instance ) ? $instance['feed_url'] : $default_instance['feed_url'];
+		$all_url   = array_key_exists( 'all_url', $instance ) ? $instance['all_url'] : $default_instance['all_url'];
 
 		if ( 'horizontal' === $direction ) {
 
@@ -122,13 +124,6 @@ class Widget_LiveWhale extends WP_Widget {
 				);
 
 			}
-
-			$group = 'agrilife';
-			if ( false !== strpos( $feed_url, 'group' ) ) {
-				preg_match('/group\/([^\/]+)/i', $feed_url, $group);
-				$group = $group[1];
-			}
-			$all_url = 'https://calendar.tamu.edu/' . $group . '/';
 
 			$output .= sprintf(
 				'<div class="events-all cell medium-shrink small-12"><a class="button gradient" href="%s" target="_blank"><span class="h3">All Events</span></a></div>',
@@ -210,6 +205,32 @@ class Widget_LiveWhale extends WP_Widget {
 			)
 		);
 
+		$all_url_output = '<p><label for="%s">%s</label><input type="text" id="%s" name="%s" class="all_url widefat" value="%s"/></p>';
+
+		echo wp_kses(
+			sprintf(
+				$all_url_output,
+				esc_url( $this->get_field_id( 'all_url' ) ),
+				esc_attr( 'All Events URL:', 'agrilife-livewhale' ),
+				esc_url( $this->get_field_id( 'all_url' ) ),
+				$this->get_field_name( 'all_url' ),
+				esc_url( $instance['all_url'] )
+			),
+			array(
+				'p'     => array(),
+				'label' => array(
+					'for' => array(),
+				),
+				'input' => array(
+					'type'  => array(),
+					'id'    => array(),
+					'name'  => array(),
+					'class' => array(),
+					'value' => array(),
+				),
+			)
+		);
+
 		$direction_output = '<p><label for="%s">%s</label><select id="%s" name="%s" class="direction widefat"><option value="vertical"%s>Vertical</option><option value="horizontal"%s>Horizontal</option></select></p>';
 
 		if ( array_key_exists( 'direction', $instance ) ) {
@@ -269,6 +290,11 @@ class Widget_LiveWhale extends WP_Widget {
 		$instance['feed_url']  = strip_tags(
 		  stripslashes(
 		    filter_var( $new_instance['feed_url'], FILTER_VALIDATE_URL )
+		  )
+		);
+		$instance['all_url']  = strip_tags(
+		  stripslashes(
+		    filter_var( $new_instance['all_url'], FILTER_VALIDATE_URL )
 		  )
 		);
 		$instance['direction'] = sanitize_text_field( $new_instance['direction'] );
