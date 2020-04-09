@@ -44,7 +44,7 @@ class Assets {
 
 		wp_register_style(
 			'agrilife-livewhale-styles',
-			AGLVW_DIR_URL . '/css/style.css',
+			AGLVW_DIR_URL . 'css/style.css',
 			false,
 			filemtime( AGLVW_DIR_PATH . '/css/style.css' ),
 			'screen'
