@@ -10,7 +10,10 @@ module.exports = (grunt) ->
       post: ''
       url: ''
     watch:
-      files: 'css/src/**/*.scss'
+      files: [
+        'css/src/**/*.scss'
+        'js/src/**/*.coffee'
+      ]
       tasks: 'develop'
     postcss:
       pkg:
