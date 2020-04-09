@@ -93,9 +93,8 @@ module.exports = (grunt) ->
   @loadNpmTasks 'grunt-sass-lint'
   @loadNpmTasks 'grunt-sass'
   @loadNpmTasks 'grunt-postcss'
-  @loadNpmTasks 'grunt-combine-media-queries'
 
-  @registerTask 'default', ['sasslint', 'sass:pkg', 'cmq', 'postcss:pkg', 'coffee']
+  @registerTask 'default', ['sasslint', 'sass:pkg', 'postcss:pkg', 'coffee']
   @registerTask 'develop', ['sasslint', 'sass:dev', 'coffee']
   @registerTask 'release', ['compress', 'makerelease']
   @registerTask 'makerelease', 'Set release branch for use in the release task', ->
