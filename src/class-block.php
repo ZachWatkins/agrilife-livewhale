@@ -122,55 +122,64 @@ class Block {
 			$attributes['count'] = $count;
 		}
 
-		// Build the LiveWhale Feed URL.
-		$furl = $this->get_url( $attributes );
+		// Build the LiveWhale Feed.
+		$furl      = $this->get_url( $attributes );
+		$output    = '';
+		$feed_json = wp_remote_get( $furl );
 
-		$output       = '';
-		$feed_json    = wp_remote_get( $furl );
-		$feed_array   = json_decode( $feed_json['body'], true );
-		$l_events     = array_slice( $feed_array, 0, $count ); // Choose number of events.
-		$l_event_list = '';
-		$group        = 'agrilife';
-		if ( array_key_exists( 'group', $attributes ) && ! empty( $attributes['group'] ) ) {
-			$group = $attributes['group'];
-		}
-		$all_url = $attributes['all_url'];
+		if ( false === is_wp_error( $feed_json ) ) {
 
-		foreach ( $l_events as $event ) {
+			$feed_array   = json_decode( $feed_json['body'], true );
+			$l_events     = array_slice( $feed_array, 0, $count ); // Choose number of events.
+			$l_event_list = '';
+			$group        = 'agrilife';
 
-			$title      = $event['title'];
-			$url        = $event['url'];
-			$location   = $event['location'];
-			$date       = $event['date_utc'];
-			$time       = $event['date_time'];
-			$date       = date_create( $date );
-			$date_day   = date_format( $date, 'd' );
-			$date_month = date_format( $date, 'M' );
+			if ( array_key_exists( 'group', $attributes ) && ! empty( $attributes['group'] ) ) {
 
-			if ( array_key_exists( 'custom_room_number', $event ) && ! empty( $event['custom_room_number'] ) ) {
-
-				$location .= ' ' . $event['custom_room_number'];
+				$group = $attributes['group'];
 
 			}
 
-			$l_event_list .= sprintf(
-				$event_template,
-				$date_month,
-				$date_day,
-				$url,
-				$title,
-				$title,
-				$location
+			$all_url = $attributes['all_url'];
+
+			foreach ( $l_events as $event ) {
+
+				$title      = $event['title'];
+				$url        = $event['url'];
+				$location   = $event['location'];
+				$date       = $event['date_utc'];
+				$time       = $event['date_time'];
+				$date       = date_create( $date );
+				$date_day   = date_format( $date, 'd' );
+				$date_month = date_format( $date, 'M' );
+
+				if ( array_key_exists( 'custom_room_number', $event ) && ! empty( $event['custom_room_number'] ) ) {
+
+					$location .= ' ' . $event['custom_room_number'];
+
+				}
+
+				$l_event_list .= sprintf(
+					$event_template,
+					$date_month,
+					$date_day,
+					$url,
+					$title,
+					$title,
+					$location
+				);
+
+			}
+
+			$output .= sprintf(
+				$cal_template,
+				$l_event_list,
+				$all_url
 			);
 
 		}
 
-		$output .= sprintf(
-			$cal_template,
-			$l_event_list,
-			$all_url
-		);
-
 		return $output;
+
 	}
 }
