@@ -112,7 +112,7 @@ class Block {
 
 		// Declare HTML for calendar and events.
 		$cal_template   = '<div class="alignfull livewhale livewhale-block invert"><div class="grid-container"><div class="grid-x grid-padding-x padding-y"><div class="events-cell cell medium-auto small-12 grid-container"><div class="grid-x grid-padding-x">%s</div></div><div class="events-all cell medium-shrink small-12"><a class="h3 arrow-right" href="%s">All Events</a></div></div></div></div>';
-		$event_template = '<div class="event cell medium-auto small-12"><div class="grid-x grid-padding-x"><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title">%s</a><div class="location">%s</div></div></div></div>';
+		$event_template = '<div class="event cell medium-auto small-12"><div class="grid-x grid-padding-x"><div class="cell date shrink"><div class="month h3">%s</div><div class="h2 day">%s</div></div><div class="cell title auto"><a href="%s" title="%s" class="event-title medium-truncate-lines medium-truncate-2-lines">%s</a><div class="location medium-truncate-lines medium-truncate-1-line">%s</div></div></div></div>';
 
 		// Decide how many calendar items to display.
 		$count = 3;
