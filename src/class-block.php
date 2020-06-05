@@ -140,7 +140,7 @@ class Block {
 
 			}
 
-			$all_url = $attributes['all_url'];
+			$all_url = isset($attributes['allevents']) ? $attributes['allevents'] : $attributes['all_url'];
 
 			foreach ( $l_events as $event ) {
 

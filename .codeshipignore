@@ -43,7 +43,6 @@ Thumbs.db
 *.avi
 
 # Don't deploy
-package.json
 bower.json
 .bower.json
 .bowerrc
